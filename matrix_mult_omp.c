@@ -22,26 +22,31 @@
 #endif
 
 #ifndef SIZE
-#define SIZE 52 //Default size
+#define SIZE 2659 //Default size
 #endif
 
 #define TIME_RESOLUTION 1000000
 #define NUM_EVENTS 5
+#define NUM_THREADS 48
 
 long long values[NUM_EVENTS];
 unsigned int Events[NUM_EVENTS]={PAPI_TOT_CYC,PAPI_TOT_INS,PAPI_L1_DCM,PAPI_L2_TCM,PAPI_L3_TCM};
 
 #if !defined(IMP2) && !defined(IMP3)
 int matrix_multiplication(float **A, float **B, float **C){
-    for(int i = 0 ; i < SIZE ; i++){
-        for(int j = 0 ; j < SIZE ; j++){
-            for(int k = 0 ; k < SIZE ; k++){
-                #ifndef TRANS
-		C[i][j] += A[i][k]*B[k][j];
-		#else
-		C[i][j] += A[i][k]*B[j][k];
-		#endif
-            } 
+    #pragma omp parallel 
+        {
+        #pragma omp for simd aligned (A,B,C:16)
+        for(int i = 0 ; i < SIZE ; i++){
+            for(int j = 0 ; j < SIZE ; j++){
+                for(int k = 0 ; k < SIZE ; k++){
+                    #ifndef TRANS
+		                C[i][j] += A[i][k]*B[k][j];
+		            #else
+		                C[i][j] += A[i][k]*B[j][k];
+		            #endif
+                } 
+            }
         }
     }
 
@@ -51,11 +56,15 @@ int matrix_multiplication(float **A, float **B, float **C){
 
 #ifdef IMP2
 int matrix_multiplication(float **A, float **B, float **C){
-    for(int i = 0 ; i < SIZE ; i++){
-        for(int k = 0 ; k < SIZE ; k++){
-	    for(int j = 0 ; j < SIZE ; j++){
-		C[i][j] += A[i][k]*B[k][j];
-            } 
+    #pragma omp parallel 
+        {
+        #pragma omp for simd aligned (A,B,C:16)
+        for(int i = 0 ; i < SIZE ; i++){
+            for(int k = 0 ; k < SIZE ; k++){
+	            for(int j = 0 ; j < SIZE ; j++){
+		            C[i][j] += A[i][k]*B[k][j];
+                }
+            }
         }
     }
 
@@ -65,14 +74,18 @@ int matrix_multiplication(float **A, float **B, float **C){
 
 #ifdef IMP3
 int matrix_multiplication(float **A, float **B, float **C){
-    for(int j = 0 ; j < SIZE ; j++){
-        for(int k = 0 ; k < SIZE ; k++){
-            for(int i = 0 ; i < SIZE ; i++){
-                #ifndef TRANS
-		C[i][j] += A[i][k]*B[k][j];
-		#else
-		C[i][j] += A[k][i]*B[j][k];
-		#endif
+    #pragma omp parallel
+        {
+        #pragma omp for simd aligned (A,B,C:16)
+        for(int j = 0 ; j < SIZE ; j++){
+            for(int k = 0 ; k < SIZE ; k++){
+                for(int i = 0 ; i < SIZE ; i++){
+                    #ifndef TRANS
+		            C[i][j] += A[i][k]*B[k][j];
+		            #else
+		            C[i][j] += A[k][i]*B[j][k];
+		            #endif
+                }
             }
         }
     }
@@ -130,6 +143,8 @@ int confirm_result(float **A, float **B, float **C)
 }
 
 int main(int argc, char* argv[]){
+   
+    omp_set_num_threads(NUM_THREADS);
     float **A, **B, **C;
     A = (float **) malloc(SIZE * sizeof(float *));
     B = (float **) malloc(SIZE * sizeof(float *));

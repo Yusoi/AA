@@ -1,0 +1,76 @@
+compute-662-6.local
+Compiling...
+-------------------------------------- TRANSPOSED: N -------------------------------------------
+-------------------------------------- IMPLEMENTATION: IMP1 | MATRIX_SIZE: EXT_MEM --------------------------------------
+matrix_mult_omp_IMP1_EXT_MEM_N
+icpc -DIMP1 -DEXT_MEM  -L/share/apps/papi/5.4.1/lib -I/share/apps/papi/5.4.1/include -lpapi  -qopenmp-simd -fopenmp -O3 -std=c++11 -qopt-report=2 -o bin/matrix_mult_omp_IMP1_EXT_MEM_N.o matrix_mult_omp.c
+echo "Done"	
+Done
+Running the tests
+Total Cycles: 3191253471
+Total Instructions: 4576402571
+L1 Data Cache Misses: 31763664
+L2 Cache Misses: 627952
+L3 Cache Misses: 26354
+Execution time: 1275595 µs
+-------------------------------------- IMPLEMENTATION: IMP2 | MATRIX_SIZE: EXT_MEM --------------------------------------
+matrix_mult_omp_IMP2_EXT_MEM_N
+icpc -DIMP2 -DEXT_MEM  -L/share/apps/papi/5.4.1/lib -I/share/apps/papi/5.4.1/include -lpapi  -qopenmp-simd -fopenmp -O3 -std=c++11 -qopt-report=2 -o bin/matrix_mult_omp_IMP2_EXT_MEM_N.o matrix_mult_omp.c
+echo "Done"	
+Done
+Running the tests
+Total Cycles: 2369523573
+Total Instructions: 4732031858
+L1 Data Cache Misses: 31653136
+L2 Cache Misses: 428494
+L3 Cache Misses: 97458
+Execution time: 1177042 µs
+-------------------------------------- IMPLEMENTATION: IMP3 | MATRIX_SIZE: EXT_MEM --------------------------------------
+matrix_mult_omp_IMP3_EXT_MEM_N
+icpc -DIMP3 -DEXT_MEM  -L/share/apps/papi/5.4.1/lib -I/share/apps/papi/5.4.1/include -lpapi  -qopenmp-simd -fopenmp -O3 -std=c++11 -qopt-report=2 -o bin/matrix_mult_omp_IMP3_EXT_MEM_N.o matrix_mult_omp.c
+echo "Done"	
+Done
+Running the tests
+Total Cycles: 16167429723
+Total Instructions: 1911733321
+L1 Data Cache Misses: 294870661
+L2 Cache Misses: 260150787
+L3 Cache Misses: 1161854
+Execution time: 7341076 µs
+-------------------------------------- TRANSPOSED: Y -------------------------------------------
+-------------------------------------- IMPLEMENTATION: IMP1 | MATRIX_SIZE: EXT_MEM --------------------------------------
+matrix_mult_omp_IMP1_EXT_MEM_Y
+icpc -DIMP1 -DEXT_MEM -DTRANS -L/share/apps/papi/5.4.1/lib -I/share/apps/papi/5.4.1/include -lpapi  -qopenmp-simd -fopenmp -O3 -std=c++11 -qopt-report=2 -o bin/matrix_mult_omp_IMP1_EXT_MEM_Y.o matrix_mult_omp.c
+echo "Done"	
+Done
+Running the tests
+Total Cycles: 3269513518
+Total Instructions: 5703703840
+L1 Data Cache Misses: 31312310
+L2 Cache Misses: 529121
+L3 Cache Misses: 90224
+Execution time: 1810081 µs
+-------------------------------------- IMPLEMENTATION: IMP2 | MATRIX_SIZE: EXT_MEM --------------------------------------
+matrix_mult_omp_IMP2_EXT_MEM_Y
+icpc -DIMP2 -DEXT_MEM -DTRANS -L/share/apps/papi/5.4.1/lib -I/share/apps/papi/5.4.1/include -lpapi  -qopenmp-simd -fopenmp -O3 -std=c++11 -qopt-report=2 -o bin/matrix_mult_omp_IMP2_EXT_MEM_Y.o matrix_mult_omp.c
+echo "Done"	
+Done
+Running the tests
+Total Cycles: 2945196204
+Total Instructions: 4503581145
+L1 Data Cache Misses: 31752176
+L2 Cache Misses: 554430
+L3 Cache Misses: 40784
+Execution time: 1346921 µs
+-------------------------------------- IMPLEMENTATION: IMP3 | MATRIX_SIZE: EXT_MEM --------------------------------------
+matrix_mult_omp_IMP3_EXT_MEM_Y
+icpc -DIMP3 -DEXT_MEM -DTRANS -L/share/apps/papi/5.4.1/lib -I/share/apps/papi/5.4.1/include -lpapi  -qopenmp-simd -fopenmp -O3 -std=c++11 -qopt-report=2 -o bin/matrix_mult_omp_IMP3_EXT_MEM_Y.o matrix_mult_omp.c
+echo "Done"	
+Done
+Running the tests
+Total Cycles: 6411344173
+Total Instructions: 2984133841
+L1 Data Cache Misses: 214587077
+L2 Cache Misses: 117083452
+L3 Cache Misses: 1978166
+Execution time: 4155766 µs

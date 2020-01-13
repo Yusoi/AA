@@ -4,7 +4,7 @@
 #PBS -l walltime=20:00
 #PBS -l nodes=1:ppn=1:r662
 #PBS -q mei
-#PBS -o out/output.txt
+#PBS -o out/output_vec.txt
 #PBS -e err/error.txt
 
 echo $HOSTNAME
@@ -19,7 +19,7 @@ source /share/apps/intel/parallel_studio_xe_2019/compilers_and_libraries_2019/li
 echo "Compiling..."
 
 implementation_array="IMP1 IMP2 IMP3"
-matrix_size_array="L1 L2 L3 EXT_MEM"
+matrix_size_array="L1 L2"
 transposed_array="N Y"
 
 make clean
@@ -29,10 +29,10 @@ for t in $transposed_array; do
 for i in $implementation_array; do
 for j in $matrix_size_array; do	
 	echo "-------------------------------------- IMPLEMENTATION: $i | MATRIX_SIZE: $j --------------------------------------"
-	FILENAME="matrix_mult_$(i)_$(j)_$(t)"
-	make IMPL=$i M_SIZE=$j TRANS=$t FILENAME=$FILENAME
+	FILENAME="matrix_mult_${i}_${j}_${t}"
+	make vec IMPL=$i M_SIZE=$j TRANS=$t FILENAME=$FILENAME
 	echo "Running the tests"
-	./bin/matrix_mult.o
+	./bin/${FILENAME}.o
 done
 done
 done
