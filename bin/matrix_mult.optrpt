@@ -1,0 +1,358 @@
+Intel(R) Advisor can now assist with vectorization and show optimization
+  report messages with your source code.
+See "https://software.intel.com/en-us/intel-advisor-xe" for details.
+
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+
+Begin optimization report for: main(int, char **)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (main(int, char **)) [1] matrix_mult.c(132,33)
+  -> INLINE: (143,5) fill_matrices(float **, float **, float **)
+  -> INLINE: (150,2) transpose_matrix(float **)
+  -> INLINE: (151,2) transpose_matrix(float **)
+  -> INLINE: (163,5) matrix_multiplication(float **, float **, float **)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at matrix_mult.c(138,5)
+   remark #15527: loop was not vectorized: function call to malloc(size_t) cannot be vectorized   [ matrix_mult.c(139,26) ]
+LOOP END
+
+LOOP BEGIN at matrix_mult.c(88,5) inlined into matrix_mult.c(143,5)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+   remark #15346: vector dependence: assumed OUTPUT dependence between call:rand() (90:32) and call:rand() (90:32)
+
+   LOOP BEGIN at matrix_mult.c(89,9) inlined into matrix_mult.c(143,5)
+      remark #15527: loop was not vectorized: function call to rand() cannot be vectorized   [ matrix_mult.c(90,32) ]
+   LOOP END
+LOOP END
+
+LOOP BEGIN at matrix_mult.c(100,5) inlined into matrix_mult.c(150,2)
+   remark #25045: Fused Loops: ( 100 100 )
+
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+   remark #15346: vector dependence: assumed ANTI dependence between B[i][j] (102:13) and B[j][i] (104:13)
+
+   LOOP BEGIN at matrix_mult.c(101,9) inlined into matrix_mult.c(150,2)
+      remark #25045: Fused Loops: ( 101 101 )
+
+      remark #25427: Loop Statements Reordered
+      remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+      remark #15346: vector dependence: assumed ANTI dependence between B[i][j] (102:13) and B[j][i] (104:13)
+   LOOP END
+
+   LOOP BEGIN at matrix_mult.c(101,9) inlined into matrix_mult.c(151,2)
+      remark #25046: Loop lost in Fusion 
+   LOOP END
+LOOP END
+
+LOOP BEGIN at matrix_mult.c(100,5) inlined into matrix_mult.c(151,2)
+   remark #25046: Loop lost in Fusion 
+LOOP END
+
+LOOP BEGIN at matrix_mult.c(68,5) inlined into matrix_mult.c(163,5)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+   remark #15346: vector dependence: assumed OUTPUT dependence between C[i][j] (74:3) and C[i][j] (74:3)
+
+   LOOP BEGIN at matrix_mult.c(69,9) inlined into matrix_mult.c(163,5)
+      remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+      remark #15346: vector dependence: assumed OUTPUT dependence between C[i][j] (74:3) and C[i][j] (74:3)
+
+      LOOP BEGIN at matrix_mult.c(70,13) inlined into matrix_mult.c(163,5)
+         remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+         remark #15346: vector dependence: assumed FLOW dependence between C[i][j] (74:3) and C[i][j] (74:3)
+         remark #25439: unrolled with remainder by 4  
+      LOOP END
+
+      LOOP BEGIN at matrix_mult.c(70,13) inlined into matrix_mult.c(163,5)
+      <Remainder>
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at matrix_mult.c(177,5)
+   remark #15527: loop was not vectorized: function call to free(void *) cannot be vectorized   [ matrix_mult.c(178,2) ]
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+matrix_mult.c(132,33):remark #34051: REGISTER ALLOCATION : [main] matrix_mult.c:132
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   19[ rax rdx rcx rbx rsi rdi r8-r15 zmm0-zmm4]
+        
+    Routine temporaries
+        Total         :     137
+            Global    :      53
+            Local     :      84
+        Regenerable   :      34
+        Spilled       :      10
+        
+    Routine stack
+        Variables     :      20 bytes*
+            Reads     :       6 [4.00e+00 ~ 0.0%]
+            Writes    :       2 [2.00e+00 ~ 0.0%]
+        Spills        :      40 bytes*
+            Reads     :       5 [1.06e+04 ~ 0.0%]
+            Writes    :       5 [1.06e+04 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: matrix_multiplication(float **, float **, float **)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (matrix_multiplication(float **, float **, float **)) [2] matrix_mult.c(67,59)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at matrix_mult.c(68,5)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+   remark #15346: vector dependence: assumed OUTPUT dependence between C[i][j] (74:3) and C[i][j] (74:3)
+
+   LOOP BEGIN at matrix_mult.c(69,9)
+      remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+      remark #15346: vector dependence: assumed OUTPUT dependence between C[i][j] (74:3) and C[i][j] (74:3)
+
+      LOOP BEGIN at matrix_mult.c(70,13)
+         remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+         remark #15346: vector dependence: assumed FLOW dependence between C[i][j] (74:3) and C[i][j] (74:3)
+         remark #25439: unrolled with remainder by 4  
+      LOOP END
+
+      LOOP BEGIN at matrix_mult.c(70,13)
+      <Remainder>
+      LOOP END
+   LOOP END
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+matrix_mult.c(67,59):remark #34051: REGISTER ALLOCATION : [_Z21matrix_multiplicationPPfS0_S0_] matrix_mult.c:67
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   18[ rax rdx rcx rbx rbp rsi rdi r8-r11 r13-r15 zmm0-zmm3]
+        
+    Routine temporaries
+        Total         :      44
+            Global    :      20
+            Local     :      24
+        Regenerable   :       4
+        Spilled       :       5
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: fill_matrices(float **, float **, float **)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (fill_matrices(float **, float **, float **)) [3] matrix_mult.c(87,53)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at matrix_mult.c(88,5)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+   remark #15346: vector dependence: assumed OUTPUT dependence between call:rand() (90:32) and call:rand() (90:32)
+
+   LOOP BEGIN at matrix_mult.c(89,9)
+      remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+      remark #15346: vector dependence: assumed OUTPUT dependence between A[i][j] (90:13) and C[i][j] (92:13)
+   LOOP END
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+matrix_mult.c(87,53):remark #34051: REGISTER ALLOCATION : [_Z13fill_matricesPPfS0_S0_] matrix_mult.c:87
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   14[ rax rdx rcx rbx rbp rsi rdi r8-r9 r12-r15 zmm0]
+        
+    Routine temporaries
+        Total         :      27
+            Global    :      22
+            Local     :       5
+        Regenerable   :       4
+        Spilled       :      10
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :      32 bytes*
+            Reads     :       4 [1.06e+04 ~ 0.0%]
+            Writes    :       4 [1.06e+04 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: transpose_matrix(float **)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (transpose_matrix(float **)) [4] matrix_mult.c(98,33)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at matrix_mult.c(100,5)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+   remark #15346: vector dependence: assumed ANTI dependence between X[i][j] (102:13) and X[j][i] (104:13)
+
+   LOOP BEGIN at matrix_mult.c(101,9)
+      remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+      remark #15346: vector dependence: assumed ANTI dependence between X[i][j] (102:13) and X[j][i] (104:13)
+      remark #25439: unrolled with remainder by 2  
+   LOOP END
+
+   LOOP BEGIN at matrix_mult.c(101,9)
+   <Remainder>
+   LOOP END
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+matrix_mult.c(98,33):remark #34051: REGISTER ALLOCATION : [_Z16transpose_matrixPPf] matrix_mult.c:98
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   10[ rax rdx rcx rbp rsi rdi r8-r11]
+        
+    Routine temporaries
+        Total         :      33
+            Global    :      16
+            Local     :      17
+        Regenerable   :       2
+        Spilled       :       1
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: confirm_result(float **, float **, float **)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (confirm_result(float **, float **, float **)) [5] matrix_mult.c(110,1)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at matrix_mult.c(111,5)
+   remark #15520: loop was not vectorized: loop with multiple exits cannot be vectorized unless it meets search loop idiom criteria
+
+   LOOP BEGIN at matrix_mult.c(113,9)
+      remark #15520: loop was not vectorized: loop with multiple exits cannot be vectorized unless it meets search loop idiom criteria
+
+      LOOP BEGIN at matrix_mult.c(116,13)
+         remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+         remark #25439: unrolled with remainder by 2  
+         remark #25456: Number of Array Refs Scalar Replaced In Loop: 1
+         remark #25457: Number of partial sums replaced: 1
+      LOOP END
+
+      LOOP BEGIN at matrix_mult.c(116,13)
+      <Remainder>
+      LOOP END
+   LOOP END
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+matrix_mult.c(110,1):remark #34051: REGISTER ALLOCATION : [_Z14confirm_resultPPfS0_S0_] matrix_mult.c:110
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   16[ rax rdx rcx rbx rbp rsi rdi r8-r10 r15 zmm0-zmm4]
+        
+    Routine temporaries
+        Total         :      51
+            Global    :      21
+            Local     :      30
+        Regenerable   :      10
+        Spilled       :       4
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       8 bytes*
+            Reads     :       1 [1.00e+00 ~ 0.0%]
+            Writes    :       1 [1.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================

@@ -1,0 +1,110 @@
+compute-662-6.local
+Compiling...
+-------------------------------------- IMPLEMENTATION: IMP1 | MATRIX_SIZE: L1 --------------------------------------
+icpc -O3 -std=c++11 -qopt-report=2  -DIMP1 -DL1 -L/share/apps/papi/5.4.1/lib -I/share/apps/papi/5.4.1/include -lpapi -o bin/matrix_mult.o matrix_mult.c
+Running the tests
+Total Cycles: 125552
+Total Instructions: 325801
+L1 Data Cache Misses: 868
+L2 Cache Misses: 384
+L3 Cache Misses: 26
+Execution time: 95 µs
+-------------------------------------- IMPLEMENTATION: IMP1 | MATRIX_SIZE: L2 --------------------------------------
+icpc -O3 -std=c++11 -qopt-report=2  -DIMP1 -DL2 -L/share/apps/papi/5.4.1/lib -I/share/apps/papi/5.4.1/include -lpapi -o bin/matrix_mult.o matrix_mult.c
+Running the tests
+Total Cycles: 2553931
+Total Instructions: 7430921
+L1 Data Cache Misses: 236058
+L2 Cache Misses: 5508
+L3 Cache Misses: 19
+Execution time: 1644 µs
+-------------------------------------- IMPLEMENTATION: IMP1 | MATRIX_SIZE: L3 --------------------------------------
+icpc -O3 -std=c++11 -qopt-report=2  -DIMP1 -DL3 -L/share/apps/papi/5.4.1/lib -I/share/apps/papi/5.4.1/include -lpapi -o bin/matrix_mult.o matrix_mult.c
+Running the tests
+Total Cycles: 16509015607
+Total Instructions: 5290799544
+L1 Data Cache Misses: 990412725
+L2 Cache Misses: 162256147
+L3 Cache Misses: 39191
+Execution time: 6905509 µs
+-------------------------------------- IMPLEMENTATION: IMP1 | MATRIX_SIZE: EXT_MEM --------------------------------------
+icpc -O3 -std=c++11 -qopt-report=2  -DIMP1 -DEXT_MEM -L/share/apps/papi/5.4.1/lib -I/share/apps/papi/5.4.1/include -lpapi -o bin/matrix_mult.o matrix_mult.c
+Running the tests
+Total Cycles: 112323852192
+Total Instructions: 42389992703
+L1 Data Cache Misses: 7970853939
+L2 Cache Misses: 4471326152
+L3 Cache Misses: 334272005
+Execution time: 44502778 µs
+-------------------------------------- IMPLEMENTATION: IMP2 | MATRIX_SIZE: L1 --------------------------------------
+icpc -O3 -std=c++11 -qopt-report=2  -DIMP2 -DL1 -L/share/apps/papi/5.4.1/lib -I/share/apps/papi/5.4.1/include -lpapi -o bin/matrix_mult.o matrix_mult.c
+Running the tests
+Total Cycles: 111811
+Total Instructions: 314469
+L1 Data Cache Misses: 1181
+L2 Cache Misses: 485
+L3 Cache Misses: 18
+Execution time: 83 µs
+-------------------------------------- IMPLEMENTATION: IMP2 | MATRIX_SIZE: L2 --------------------------------------
+icpc -O3 -std=c++11 -qopt-report=2  -DIMP2 -DL2 -L/share/apps/papi/5.4.1/lib -I/share/apps/papi/5.4.1/include -lpapi -o bin/matrix_mult.o matrix_mult.c
+Running the tests
+Total Cycles: 2412308
+Total Instructions: 5648253
+L1 Data Cache Misses: 259476
+L2 Cache Misses: 45315
+L3 Cache Misses: 32
+Execution time: 1004 µs
+-------------------------------------- IMPLEMENTATION: IMP2 | MATRIX_SIZE: L3 --------------------------------------
+icpc -O3 -std=c++11 -qopt-report=2  -DIMP2 -DL3 -L/share/apps/papi/5.4.1/lib -I/share/apps/papi/5.4.1/include -lpapi -o bin/matrix_mult.o matrix_mult.c
+Running the tests
+Total Cycles: 1627537937
+Total Instructions: 2866644131
+L1 Data Cache Misses: 151884461
+L2 Cache Misses: 43982644
+L3 Cache Misses: 5968
+Execution time: 679364 µs
+-------------------------------------- IMPLEMENTATION: IMP2 | MATRIX_SIZE: EXT_MEM --------------------------------------
+icpc -O3 -std=c++11 -qopt-report=2  -DIMP2 -DEXT_MEM -L/share/apps/papi/5.4.1/lib -I/share/apps/papi/5.4.1/include -lpapi -o bin/matrix_mult.o matrix_mult.c
+Running the tests
+Total Cycles: 18502572884
+Total Instructions: 22752233740
+L1 Data Cache Misses: 1209933557
+L2 Cache Misses: 446328999
+L3 Cache Misses: 158583683
+Execution time: 5867962 µs
+-------------------------------------- IMPLEMENTATION: IMP3 | MATRIX_SIZE: L1 --------------------------------------
+icpc -O3 -std=c++11 -qopt-report=2  -DIMP3 -DL1 -L/share/apps/papi/5.4.1/lib -I/share/apps/papi/5.4.1/include -lpapi -o bin/matrix_mult.o matrix_mult.c
+Running the tests
+Total Cycles: 399844
+Total Instructions: 1008456
+L1 Data Cache Misses: 1704
+L2 Cache Misses: 454
+L3 Cache Misses: 25
+Execution time: 299 µs
+-------------------------------------- IMPLEMENTATION: IMP3 | MATRIX_SIZE: L2 --------------------------------------
+icpc -O3 -std=c++11 -qopt-report=2  -DIMP3 -DL2 -L/share/apps/papi/5.4.1/lib -I/share/apps/papi/5.4.1/include -lpapi -o bin/matrix_mult.o matrix_mult.c
+Running the tests
+Total Cycles: 9835583
+Total Instructions: 22543846
+L1 Data Cache Misses: 347373
+L2 Cache Misses: 14026
+L3 Cache Misses: 31
+Execution time: 6220 µs
+-------------------------------------- IMPLEMENTATION: IMP3 | MATRIX_SIZE: L3 --------------------------------------
+icpc -O3 -std=c++11 -qopt-report=2  -DIMP3 -DL3 -L/share/apps/papi/5.4.1/lib -I/share/apps/papi/5.4.1/include -lpapi -o bin/matrix_mult.o matrix_mult.c
+Running the tests
+Total Cycles: 54321777445
+Total Instructions: 16438432621
+L1 Data Cache Misses: 5755189684
+L2 Cache Misses: 1536238334
+L3 Cache Misses: 266716
+Execution time: 17138607 µs
+-------------------------------------- IMPLEMENTATION: IMP3 | MATRIX_SIZE: EXT_MEM --------------------------------------
+icpc -O3 -std=c++11 -qopt-report=2  -DIMP3 -DEXT_MEM -L/share/apps/papi/5.4.1/lib -I/share/apps/papi/5.4.1/include -lpapi -o bin/matrix_mult.o matrix_mult.c
+Running the tests
+Total Cycles: 380383072055
+Total Instructions: 131698260553
+L1 Data Cache Misses: 44466002606
+L2 Cache Misses: 39914178326
+L3 Cache Misses: 379204031
+Execution time: 119910011 µs
